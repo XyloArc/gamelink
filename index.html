@@ -1,0 +1,65 @@
+// public/index.html
+fs.mkdirSync(path.join(__dirname, 'public'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'public', 'index.html'), `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiteChat - Lightweight Gaming Communication</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="login-screen" id="loginScreen">
+      <div class="login-container">
+        <h1>LiteChat</h1>
+        <p>Lightweight communication for gamers</p>
+        
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" maxlength="20" placeholder="Enter username">
+        </div>
+        
+        <div class="form-group">
+          <label for="roomId">Room ID:</label>
+          <input type="text" id="roomId" placeholder="Enter room ID or create new">
+        </div>
+        
+        <button id="joinBtn">Join Room</button>
+      </div>
+    </div>
+    
+    <div class="chat-screen hidden" id="chatScreen">
+      <div class="sidebar">
+        <div class="room-info">
+          <h2 id="roomDisplay">Room: </h2>
+          <button id="leaveBtn">Leave</button>
+        </div>
+        
+        <div class="user-list">
+          <h3>Users</h3>
+          <ul id="userList"></ul>
+        </div>
+      </div>
+      
+      <div class="chat-container">
+        <div class="messages" id="messages"></div>
+        
+        <div class="input-area">
+          <textarea id="messageInput" placeholder="Type a message..." rows="2"></textarea>
+          <div class="controls">
+            <button id="sendBtn">Send</button>
+            <button id="voiceBtn" class="voice-btn">🎤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="notification hidden" id="notification"></div>
+  </div>
+  
+  <script src="client.js"></script>
+</body>
+</html>
+`);
