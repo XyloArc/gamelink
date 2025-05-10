@@ -1,18 +1,26 @@
 {
-  "name": "GameLink",
+  "name": "litechat-desktop",
   "version": "1.0.0",
-  "description": "Lightweight gaming communication app",
-  "main": "server.js",
+  "description": "Lightweight gaming communication desktop app",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && npm run electron\"",
+    "build": "electron-builder --win --mac --linux",
+    "build:windows": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
   },
   "keywords": [
     "chat",
     "websocket",
     "realtime",
     "gaming",
-    "voice"
+    "voice",
+    "desktop",
+    "electron"
   ],
   "author": "",
   "license": "MIT",
@@ -21,9 +29,36 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "concurrently": "^8.2.0",
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.3",
+    "nodemon": "^3.0.1",
+    "wait-on": "^7.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "build": {
+    "appId": "com.yourname.litechat",
+    "productName": "LiteChat",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "category": "Network;Chat",
+      "icon": "build/icon.png"
+    }
   }
 }
